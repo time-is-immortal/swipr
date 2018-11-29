@@ -96,6 +96,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mProgressView = findViewById(R.id.login_progress);
     }
 
+    public void goToHome(View view){
+        Intent homeIntent = new Intent(this, HomePage.class);
+        startActivity(homeIntent);
+    }
+
     private void populateAutoComplete() {
         if (!mayRequestContacts()) {
             return;
