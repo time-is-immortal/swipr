@@ -24,12 +24,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login"
             android:parentActivityName=".Test">
-            <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Test" />
+                android:value="net.swiprnoswiping.swipr.Test" />
         </activity>
         <activity android:name=".HomePage"></activity>
     </application>

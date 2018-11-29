@@ -9,7 +9,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.content.Intent;
 
 public class Test extends AppCompatActivity {
 
@@ -37,11 +36,6 @@ public class Test extends AppCompatActivity {
         // Example of a call to a native method
         TextView tv = (TextView) findViewById(R.id.sample_text);
         tv.setText(stringFromJNI());
-    }
-
-    public void sendMessage(View view){
-        Intent myIntent = new Intent(this, LoginActivity.class);
-        startActivity(myIntent);
     }
 
     @Override
