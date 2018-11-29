@@ -1,5 +1,6 @@
 package net.swiprnoswiping.swipr;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.support.design.widget.FloatingActionButton;
@@ -36,6 +37,11 @@ public class Test extends AppCompatActivity {
         // Example of a call to a native method
         TextView tv = (TextView) findViewById(R.id.sample_text);
         tv.setText(stringFromJNI());
+    }
+
+    public void sendMessage(View view){
+        Intent myIntent = new Intent(this, LoginActivity.class);
+        startActivity(myIntent);
     }
 
     @Override

@@ -15,4 +15,7 @@
         completions."
     </string>
     <string name="prompt_swipr_pw">Enter a password</string>
+    <string name="log_in">LOG IN</string>
+    <string name="register">REGISTER</string>
+    <string name="swipr">SWIPR</string>
 </resources>
