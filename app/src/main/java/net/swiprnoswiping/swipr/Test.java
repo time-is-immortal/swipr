@@ -39,9 +39,14 @@ public class Test extends AppCompatActivity {
         tv.setText(stringFromJNI());
     }
 
-    public void sendMessage(View view){
-        Intent myIntent = new Intent(this, LoginActivity.class);
-        startActivity(myIntent);
+    public void loginButton(View view){
+        Intent loginIntent = new Intent(this, LoginActivity.class);
+        startActivity(loginIntent);
+    }
+
+    public void registerButton(View view){
+        Intent regIntent = new Intent(this, RegisterActivity.class);
+        startActivity(regIntent);
     }
 
     @Override

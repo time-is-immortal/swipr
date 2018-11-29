@@ -32,7 +32,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="net.swiprnoswiping.swipr.Test" />
         </activity>
-        <activity android:name=".HomePage"></activity>
+        <activity android:name=".HomePage" />
+        <activity
+            android:name=".RegisterActivity"
+            android:label="@string/title_activity_register"
+            android:parentActivityName=".Test">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.swiprnoswiping.swipr.Test" />
+        </activity>
     </application>
 
 </manifest>
