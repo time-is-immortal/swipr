@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "716494243921",
+    "firebase_url": "https://swipr-f97ef.firebaseio.com",
+    "project_id": "swipr-f97ef",
+    "storage_bucket": "swipr-f97ef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716494243921:android:82400e40cdfd3209",
+        "android_client_info": {
+          "package_name": "net.swiprnoswiping.swipr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "716494243921-a76lvl4aamem09g87m8e1ktpld8kf74d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1LH8ksL2D2UMR7iQv_S-7UcMLq2rh-E8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
