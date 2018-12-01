@@ -24,7 +24,7 @@ public class HomePage extends AppCompatActivity {
         message.setOnClickListener (new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent logOutIntent = new Intent(HomePage.this, FriendActivity.class);
+                Intent logOutIntent = new Intent(HomePage.this, MessageActivity.class);
                 startActivity(logOutIntent);
             }
         });
@@ -32,7 +32,7 @@ public class HomePage extends AppCompatActivity {
         friend.setOnClickListener (new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent logOutIntent = new Intent(HomePage.this, MessageActivity.class);
+                Intent logOutIntent = new Intent(HomePage.this, FriendActivity.class);
                 startActivity(logOutIntent);
             }
         });
