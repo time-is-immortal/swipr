@@ -16,27 +16,28 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton"
+        app:layout_constraintTop_toBottomOf="@+id/messageButton"
         app:srcCompat="@drawable/rotated" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/messageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="7dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="50dp"
         android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.461"
-        app:layout_constraintStart_toEndOf="@+id/floatingActionButton4"
+        app:layout_constraintStart_toEndOf="@+id/friendButton"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/sym_action_chat" />
+        app:srcCompat="@android:drawable/sym_action_chat"/>
 
     <Button
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="requestButton"
         android:radius="20dp"
         android:text="REQUEST"
         android:textStyle="bold"
@@ -48,7 +49,7 @@
         app:layout_constraintVertical_bias="0.934" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton4"
+        android:id="@+id/friendButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="167dp"
@@ -57,14 +58,14 @@
         android:layout_marginBottom="8dp"
         android:clickable="true"
         app:layout_constraintBottom_toTopOf="@+id/imageButton4"
-        app:layout_constraintEnd_toStartOf="@+id/floatingActionButton"
-        app:layout_constraintStart_toEndOf="@+id/floatingActionButton15"
+        app:layout_constraintEnd_toStartOf="@+id/messageButton"
+        app:layout_constraintStart_toEndOf="@+id/logOutButton"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/friend" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton15"
+        android:id="@+id/logOutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -75,6 +76,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/medium_white_off_btn" />
+        app:srcCompat="@drawable/medium_white_off_btn"
+        app:useCompatPadding="false" />
 
 </android.support.constraint.ConstraintLayout>

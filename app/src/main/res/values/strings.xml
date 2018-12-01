@@ -19,4 +19,12 @@
     <string name="register">REGISTER</string>
     <string name="swipr">SWIPR</string>
     <string name="title_activity_register">"Register "</string>
+    <string name="type_your_message_here">Type your message here</string>
+    <string name="send_message">Send Message</string>
+    <string name="cancel">Cancel</string>
+    <string name="scan">Scan</string>
+    <string name="back">Back</string>
+    <string name="accept_request">Accept Request</string>
+    <string name="manage_friend_requests">Manage Friend Requests</string>
+    <string name="view_friend_list">View Friend List</string>
 </resources>
