@@ -39,7 +39,7 @@ public class HomePage extends AppCompatActivity {
     }
 
     public void requestButton(View view){
-        Intent requestIntent = new Intent(this, MapActivity.class);
+        Intent requestIntent = new Intent(this, MapsActivity.class);
         startActivity(requestIntent);
     }
 }
