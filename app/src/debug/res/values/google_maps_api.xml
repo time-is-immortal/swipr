@@ -1,39 +1,20 @@
 <resources>
     <!--
-    TODO: Before you run your application, you need a Google Maps API key.
+    TODO: Before you release your application, you need a Google Maps API key.
 
-    To get one, follow this link, follow the directions and press "Create" at the end:
+    To do this, you can either add your release key credentials to your existing
+    key, or create a new key.
 
-<<<<<<< HEAD
-    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=E2:98:0A:D5:99:60:92:01:67:A2:D8:1A:3B:3E:64:38:A1:AD:CC:F1%3Bnet.swiprnoswiping.swipr
-=======
-    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=35:A6:51:16:61:2C:73:63:5F:2F:1F:AE:DF:FD:15:50:6C:4D:E3:54%3Bnet.swiprnoswiping.swipr
->>>>>>> 0da8ff2976402eabea5a5a750bdbbbe9946c5de8
+    Note that this file specifies the API key for the release build target.
+    If you have previously set up a key for the debug target with the debug signing certificate,
+    you will also need to set up a key for your release certificate.
 
-    You can also add your credentials to an existing key, using these values:
+    Follow the directions here:
 
-    Package name:
-<<<<<<< HEAD
-    E2:98:0A:D5:99:60:92:01:67:A2:D8:1A:3B:3E:64:38:A1:AD:CC:F1
-
-    SHA-1 certificate fingerprint:
-    E2:98:0A:D5:99:60:92:01:67:A2:D8:1A:3B:3E:64:38:A1:AD:CC:F1
-=======
-    35:A6:51:16:61:2C:73:63:5F:2F:1F:AE:DF:FD:15:50:6C:4D:E3:54
-
-    SHA-1 certificate fingerprint:
-    35:A6:51:16:61:2C:73:63:5F:2F:1F:AE:DF:FD:15:50:6C:4D:E3:54
->>>>>>> 0da8ff2976402eabea5a5a750bdbbbe9946c5de8
-
-    Alternatively, follow the directions here:
-    https://developers.google.com/maps/documentation/android/start#get-key
+    https://developers.google.com/maps/documentation/android/signup
 
     Once you have your key (it starts with "AIza"), replace the "google_maps_key"
     string in this file.
     -->
-<<<<<<< HEAD
-    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDps9h-7WAaQVCGhqezrHVJKio_Udj0Yzo</string>
-=======
-    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyAT0LSCbp0_bKS-KV55Kf6ieMtZBmjdmXw</string>
->>>>>>> 0da8ff2976402eabea5a5a750bdbbbe9946c5de8
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">YOUR_KEY_HERE</string>
 </resources>

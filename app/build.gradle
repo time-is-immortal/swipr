@@ -40,13 +40,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.5'
     implementation 'com.google.firebase:firebase-auth:16.0.5'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
-<<<<<<< HEAD
-    implementation 'com.google.android.gms:play-services-maps:16.0.0'
-=======
     implementation 'com.google.android.gms:play-services-location:16.0.0'
     implementation 'com.google.android.gms:play-services-nearby:16.0.0'
     implementation 'com.google.android.gms:play-services-games:16.0.0'
->>>>>>> 0da8ff2976402eabea5a5a750bdbbbe9946c5de8
 }
 
 apply plugin: 'com.google.gms.google-services'

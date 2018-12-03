@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-<<<<<<< HEAD
-=======
     xmlns:map="http://schemas.android.com/apk/res-auto"
->>>>>>> 0da8ff2976402eabea5a5a750bdbbbe9946c5de8
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/map"
     android:name="com.google.android.gms.maps.SupportMapFragment"
