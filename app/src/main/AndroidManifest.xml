@@ -66,7 +66,15 @@
 
         <activity
             android:name=".MapsActivity"
+<<<<<<< HEAD
+            android:label="@string/title_activity_maps">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.swiprnoswiping.swipr.HomePage" />
+        </activity>
+=======
             android:label="@string/title_activity_maps"></activity>
+>>>>>>> 0da8ff2976402eabea5a5a750bdbbbe9946c5de8
     </application>
 
 </manifest>

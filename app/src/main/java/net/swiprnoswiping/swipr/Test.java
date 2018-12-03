@@ -25,7 +25,10 @@ public class Test extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 0da8ff2976402eabea5a5a750bdbbbe9946c5de8
         // Example of a call to a native method
         TextView tv = (TextView) findViewById(R.id.sample_text);
         tv.setText(stringFromJNI());
