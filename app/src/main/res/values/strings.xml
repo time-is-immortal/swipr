@@ -32,4 +32,8 @@
     <string name="insert_qr_here">insert qr here</string>
     <string name="generate_qrcode">Generate QRCode</string>
     <string name="todo">TODO</string>
+<<<<<<< HEAD
+=======
+    <string name="generate_qr">Generate QR</string>
+>>>>>>> 5dc4580ea1a4d16cd734c6e61685d6b1bbfe159a
 </resources>
