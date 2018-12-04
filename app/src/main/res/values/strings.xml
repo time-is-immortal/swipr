@@ -28,4 +28,5 @@
     <string name="manage_friend_requests">Manage Friend Requests</string>
     <string name="view_friend_list">View Friend List</string>
     <string name="title_activity_maps">Map</string>
+    <string name="view_map">View Map</string>
 </resources>
