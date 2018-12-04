@@ -60,7 +60,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             double latitude = location.getLatitude();
                             LatLng curLoc = new LatLng(latitude, longitude);
                             mMap.addMarker(new MarkerOptions().position(curLoc).title("Your Location"));
-                            mMap.moveCamera(CameraUpdateFactory.newLatLng(curLoc));
+                            float zoomLevel = 16.0f;
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(curLoc, zoomLevel));
                         }
                     }
                 });
