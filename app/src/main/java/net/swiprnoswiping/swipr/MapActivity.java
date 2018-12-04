@@ -17,8 +17,13 @@ public class MapActivity extends AppCompatActivity {
         startActivity(cancelIntent);
     }
     public void scanButton(View view){
-        Intent scanIntent = new Intent(this, QRActivity.class);
+        Intent scanIntent = new Intent(this, ScanActivity.class);
         startActivity(scanIntent);
+    }
+
+    public void genQR(View view){
+        Intent genIntent = new Intent(this, QRActivity.class);
+        startActivity(genIntent);
     }
 
     public void mapButton(View view){
