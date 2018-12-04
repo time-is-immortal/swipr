@@ -20,13 +20,6 @@
         android:layout_marginBottom="8dp"
         android:visibility="gone" />
 
-    <Button
-        android:id="@+id/button6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="goToHome"
-        android:text="super secret login" />
-
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"

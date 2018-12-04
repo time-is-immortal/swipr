@@ -49,11 +49,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.email_sign_in_button).setOnClickListener(this);
     }
 
-    public void goToHome(View view) {
-        Intent homeIntent = new Intent(this, HomePage.class);
-        startActivity(homeIntent);
-    }
-
     public void attemptLogin(){
         String email = mEmailView.getText().toString().trim();
         String password = mPasswordView.getText().toString().trim();
