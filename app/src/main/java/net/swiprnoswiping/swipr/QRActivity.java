@@ -31,7 +31,7 @@ public class QRActivity extends AppCompatActivity {
     final RelativeLayout rl = (RelativeLayout) findViewById(R.id.reLay);
     final ImageView qrcode = (ImageView) findViewById(R.id.qrCode);
     final String random_string = "randomSecretConfirmationKey";
-    Button btn = (Button) findViewById(R.id.scanME);
+    Button btn = (Button) findViewById(R.id.genQR);
     btn.setOnClickListener(new View.OnClickListener(){
        @Override
        public void onClick(View v) {
