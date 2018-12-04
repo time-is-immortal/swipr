@@ -51,6 +51,8 @@ public class FriendsListActivity extends AppCompatActivity{
         // List of friends that will be displayed.
         friends = new ArrayList<String>(99);
 
+        final String userEmail = user.getEmail();
+
         // Getting all friends who have accepted friend requests.
         db.collection("Friends")
             .whereEqualTo("accepted", "true")
@@ -61,8 +63,10 @@ public class FriendsListActivity extends AppCompatActivity{
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Map friendUser = document.getData();
-                            if (user != friendUser.get("user1") && user != friendUser.get("user2"))
+                            if (userEmail != friendUser.get("user1"))
                                 friends.add(friendUser.get("user1").toString());
+                            if (userEmail != friendUser.get("user2"))
+                                friends.add(friendUser.get("user2").toString());
                         }
                     }
                 }
