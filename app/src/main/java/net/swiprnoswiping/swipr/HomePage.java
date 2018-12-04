@@ -15,20 +15,24 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Calendar;
 import java.util.Date;
+import java.lang.Object;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.Tasks;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.firebase.firestore.GeoPoint;
+import com.google.firebase.messaging.FirebaseMessagingService;
+import com.google.firebase.messaging.RemoteMessage;
 
 public class HomePage extends AppCompatActivity {
 
@@ -37,7 +41,9 @@ public class HomePage extends AppCompatActivity {
     private FirebaseUser user;
 
     private FusedLocationProviderClient mFusedLocationClient;
+    String idToken;
 
+    Map<String, Object> request = new HashMap<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +55,7 @@ public class HomePage extends AppCompatActivity {
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
 
         logOut.setOnClickListener (new View.OnClickListener(){
             @Override
@@ -73,16 +80,39 @@ public class HomePage extends AppCompatActivity {
                 startActivity(logOutIntent);
             }
         });
+        FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
+        mUser.getIdToken(true)
+                .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                    public void onComplete(@NonNull Task<GetTokenResult> task) {
+                        if (task.isSuccessful()) {
+                            idToken = task.getResult().getToken();
+                            request.put("token", idToken);
+                            db.collection("Notifications").add(request).addOnSuccessListener(new OnSuccessListener<DocumentReference>(){
+                                @Override
+                                public void onSuccess(DocumentReference documentReference){
+                                    Toast.makeText(HomePage.this, "Request successfully added.", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                                    .addOnFailureListener(new OnFailureListener(){
+                                        @Override
+                                        public void onFailure(@NonNull Exception e){
+                                            Toast.makeText(HomePage.this, "Request failed.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                        } else {
+                            // Handle error -> task.getException();
+                        }
+                    }
+                });
+
     }
 
-    Map<String, Object> request = new HashMap<>();
 
     public void addRequestToDatabase(double lng, double lat){
         Timestamp currentTime = Timestamp.now();
 
         GeoPoint receiverPos = new GeoPoint(lng, lat);
         GeoPoint swiperPos = new GeoPoint(0, 0);
-
         request.put("IsCompleted", false);
         request.put("Receiver", firebaseAuth.getCurrentUser().getUid());
         request.put("Swiper", "Swiper"); // Add this later
@@ -90,18 +120,19 @@ public class HomePage extends AppCompatActivity {
         request.put("receiverPos", receiverPos); // Add this later
         request.put("request_time", currentTime);
         request.put("swiperPos", swiperPos); // Add this later as a GeoPoint
+        request.put("token", idToken);
         db.collection("Requests").add(request).addOnSuccessListener(new OnSuccessListener<DocumentReference>(){
             @Override
             public void onSuccess(DocumentReference documentReference){
                 Toast.makeText(HomePage.this, "Request successfully added.", Toast.LENGTH_SHORT).show();
             }
         })
-        .addOnFailureListener(new OnFailureListener(){
-            @Override
-            public void onFailure(@NonNull Exception e){
-                Toast.makeText(HomePage.this, "Request failed.", Toast.LENGTH_SHORT).show();
-            }
-        });
+                .addOnFailureListener(new OnFailureListener(){
+                    @Override
+                    public void onFailure(@NonNull Exception e){
+                        Toast.makeText(HomePage.this, "Request failed.", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     public void requestButton(View view){
@@ -121,5 +152,7 @@ public class HomePage extends AppCompatActivity {
         Intent requestIntent = new Intent(this, MapActivity.class);
         startActivity(requestIntent);
     }
+
+
 }
 
