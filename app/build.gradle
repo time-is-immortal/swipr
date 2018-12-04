@@ -26,6 +26,12 @@ android {
             path "CMakeLists.txt"
         }
     }
+    buildToolsVersion '27.0.3' // Older versions may give compile errors
+}
+
+repositories{
+    jcenter()
+    mavenLocal()
 }
 
 dependencies {
