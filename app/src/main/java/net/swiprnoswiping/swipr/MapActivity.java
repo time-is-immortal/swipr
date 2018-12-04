@@ -38,6 +38,7 @@ public class MapActivity extends AppCompatActivity {
 
     public void genQR(View view){
         Intent genIntent = new Intent(this, QRActivity.class);
+        genIntent.putExtra("secret_key", secret_key);
         startActivity(genIntent);
     }
 
@@ -51,7 +52,8 @@ public class MapActivity extends AppCompatActivity {
         integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
         integrator.setPrompt("Scan the QR Code on the recipient's device");
         integrator.setBeepEnabled(true);
-        integrator.setBarcodeImageEnabled(true);
+        integrator.setBarcodeImageEnabled(false);
+        integrator.setOrientationLocked(false);
         integrator.initiateScan();
     }
 }
