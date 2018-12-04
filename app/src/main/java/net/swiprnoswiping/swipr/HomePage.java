@@ -87,20 +87,9 @@ public class HomePage extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             idToken = task.getResult().getToken();
                             request.put("token", idToken);
-                            db.collection("Notifications").add(request).addOnSuccessListener(new OnSuccessListener<DocumentReference>(){
-                                @Override
-                                public void onSuccess(DocumentReference documentReference){
-                                    Toast.makeText(HomePage.this, "Request successfully added.", Toast.LENGTH_SHORT).show();
-                                }
-                            })
-                                    .addOnFailureListener(new OnFailureListener(){
-                                        @Override
-                                        public void onFailure(@NonNull Exception e){
-                                            Toast.makeText(HomePage.this, "Request failed.", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
+                            db.collection("Notifications").add(request);
                         } else {
-                            // Handle error -> task.getException();
+                            Toast.makeText(HomePage.this, "Failed to acquire token.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
