@@ -30,4 +30,6 @@
     <string name="title_activity_maps">Map</string>
     <string name="view_map">View Map</string>
     <string name="insert_qr_here">insert qr here</string>
+    <string name="generate_qrcode">Generate QRCode</string>
+    <string name="todo">TODO</string>
 </resources>
