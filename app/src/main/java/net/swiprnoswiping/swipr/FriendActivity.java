@@ -18,6 +18,11 @@ public class FriendActivity extends AppCompatActivity {
         startActivity(fLIntent);
     }
 
+    public void manageFriendRequests(View view){
+        Intent manageIntent = new Intent(this, manageFriendRequests.class);
+        startActivity(manageIntent);
+    }
+
     public void backButton(View view){
         Intent backIntent = new Intent(this, HomePage.class);
         startActivity(backIntent);

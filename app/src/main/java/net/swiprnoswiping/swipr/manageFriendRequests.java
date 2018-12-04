@@ -28,7 +28,7 @@ import android.util.*;
 
 import java.util.List;
 
-public class FriendsListActivity extends AppCompatActivity{
+public class manageFriendRequests extends AppCompatActivity {
 
     ListView friendsList;
 
@@ -36,59 +36,51 @@ public class FriendsListActivity extends AppCompatActivity{
     private FirebaseUser user;
     private FirebaseAuth firebaseAuth;
 
-    private ArrayList<String> friends;
-    private static final String TAG = "FriendsListActivity";
+    private ArrayList<String> friendRequests;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_friends_list);
+        setContentView(R.layout.activity_manage_friend_requests);
 
         db = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        // List of friends that will be displayed.
-        friends = new ArrayList<String>(99);
+        // List of friend requests that will be displayed. Max is 50.
+        friendRequests = new ArrayList<String>(50);
 
         final String userEmail = user.getEmail();
 
         // Getting all friends who have accepted friend requests.
         db.collection("Friends")
-            .whereEqualTo("accepted", "true")
+            .whereEqualTo("accepted", "false")
+            //.whereArrayContains("user1", userEmail)
             .get()
             .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    if (task.isSuccessful()) {
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            Map friendUser = document.getData();
-                            if (userEmail != friendUser.get("user1"))
-                                friends.add(friendUser.get("user1").toString());
-                            if (userEmail != friendUser.get("user2"))
-                                friends.add(friendUser.get("user2").toString());
-                        }
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Map friendUser = document.getData();
+                        if (userEmail != friendUser.get("user1"))
+                            friendRequests.add(friendUser.get("user1").toString());
+                        if (userEmail != friendUser.get("user2"))
+                            friendRequests.add(friendUser.get("user2").toString());
                     }
+                }
                 }
             });
 
-        friendsList= (ListView)findViewById(R.id.friendList);
+        friendsList= (ListView)findViewById(R.id.requestList);
 
-        ListAdapter listAdapter = new ArrayAdapter<String>(this, android.R.layout.activity_list_item, friends);
+        ListAdapter listAdapter = new ArrayAdapter<String>(this, android.R.layout.activity_list_item, friendRequests);
 
         friendsList.setAdapter(listAdapter);
-
     }
-
-    // Query Example
-    public void queries(){
-        CollectionReference friendsRef = db.collection("Friends");
-        Query findAcceptedFriends = friendsRef.whereEqualTo("accepted", "true");
-    }
-
 
     public void backButton(View view){
-        Intent backIntent = new Intent(this, FriendActivity.class);
+        Intent backIntent = new Intent(this, HomePage.class);
         startActivity(backIntent);
     }
 }
