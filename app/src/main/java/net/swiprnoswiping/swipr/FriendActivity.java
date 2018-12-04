@@ -13,6 +13,11 @@ public class FriendActivity extends AppCompatActivity {
         setContentView(R.layout.activity_friend);
     }
 
+    public void friendsList(View view){
+        Intent fLIntent = new Intent(this, FriendsListActivity.class);
+        startActivity(fLIntent);
+    }
+
     public void backButton(View view){
         Intent backIntent = new Intent(this, HomePage.class);
         startActivity(backIntent);

@@ -1,6 +1,7 @@
 package net.swiprnoswiping.swipr;
 
 import android.content.Intent;
+import android.location.Location;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,51 +9,34 @@ import android.view.View;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
+import android.util.*;
 
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Calendar;
 import java.util.Date;
-import com.google.android.gms.tasks.OnCompleteListener;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.DocumentChange.Type;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FieldPath;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.FirebaseFirestoreSettings;
-import com.google.firebase.firestore.ListenerRegistration;
-import com.google.firebase.firestore.MetadataChanges;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.Query.Direction;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.ServerTimestamp;
-import com.google.firebase.firestore.SetOptions;
-import com.google.firebase.firestore.Source;
-import com.google.firebase.firestore.Transaction;
-import com.google.firebase.firestore.WriteBatch;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.firebase.firestore.GeoPoint;
 
 public class HomePage extends AppCompatActivity {
 
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
+
+    private FusedLocationProviderClient mFusedLocationClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +47,8 @@ public class HomePage extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
+
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         logOut.setOnClickListener (new View.OnClickListener(){
             @Override
@@ -91,15 +77,19 @@ public class HomePage extends AppCompatActivity {
 
     Map<String, Object> request = new HashMap<>();
 
-    public void addRequestToDatabase(){
+    public void addRequestToDatabase(double lng, double lat){
         Timestamp currentTime = Timestamp.now();
+
+        GeoPoint receiverPos = new GeoPoint(lng, lat);
+        GeoPoint swiperPos = new GeoPoint(0, 0);
+
         request.put("IsCompleted", false);
         request.put("Receiver", firebaseAuth.getCurrentUser().getUid());
         request.put("Swiper", "Swiper"); // Add this later
         request.put("qr_val", "QR_VAL"); // Add this later when the request has been accepted
-        request.put("receiverPos", "ReceiverLocation"); // Add this later
+        request.put("receiverPos", receiverPos); // Add this later
         request.put("request_time", currentTime);
-        request.put("swiperPos", "geopointSwiperLocation"); // Add this later as a GeoPoint
+        request.put("swiperPos", swiperPos); // Add this later as a GeoPoint
         db.collection("Requests").add(request).addOnSuccessListener(new OnSuccessListener<DocumentReference>(){
             @Override
             public void onSuccess(DocumentReference documentReference){
@@ -115,7 +105,19 @@ public class HomePage extends AppCompatActivity {
     }
 
     public void requestButton(View view){
-        addRequestToDatabase();
+        double longitude = 0;
+        double latitude = 0;
+        mFusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                // Got last known location. In some rare situations this can be null.
+                if (location != null) {
+                    double longitude = location.getLongitude();
+                    double latitude = location.getLatitude();
+                }
+            }
+        });
+        addRequestToDatabase(longitude, latitude);
         Intent requestIntent = new Intent(this, MapActivity.class);
         startActivity(requestIntent);
     }

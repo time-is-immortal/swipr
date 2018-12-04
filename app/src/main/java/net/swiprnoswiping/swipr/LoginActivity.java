@@ -92,6 +92,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         Toast.makeText(getApplicationContext(), "Email not verified", Toast.LENGTH_SHORT).show();
                     }
                 }
+                else
+                    Toast.makeText(LoginActivity.this, "Wrong Username/Password", Toast.LENGTH_SHORT). show();
             }
         });
     }
