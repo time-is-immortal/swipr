@@ -1,25 +1,90 @@
 package net.swiprnoswiping.swipr;
 
+import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ListAdapter;
+import android.widget.ArrayAdapter;
 import android.widget.SimpleCursorAdapter;
+import java.util.*;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.Query;
 
 import android.widget.ListView;
+import android.util.*;
+
+import java.util.List;
 
 public class FriendsListActivity extends AppCompatActivity{
 
-    // This is the Adapter being used to display the list's data
-    SimpleCursorAdapter mAdapter;
     ListView friendsList;
 
+    private FirebaseFirestore db;
+    private FirebaseUser user;
+    private FirebaseAuth firebaseAuth;
+
+    private ArrayList<String> friends;
+    private static final String TAG = "FriendsListActivity";
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends_list);
 
+        db = FirebaseFirestore.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
+        final FirebaseUser user = firebaseAuth.getCurrentUser();
+
+        // List of friends that will be displayed.
+        friends = new ArrayList<String>(99);
+
+        // Getting all friends who have accepted friend requests.
+        db.collection("Friends")
+            .whereEqualTo("accepted", "true")
+            .get()
+            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Map friendUser = document.getData();
+                            if (user != friendUser.get("user1") && user != friendUser.get("user2"))
+                                friends.add(friendUser.get("user1").toString());
+                        }
+                    }
+                }
+            });
+
         friendsList= (ListView)findViewById(R.id.friendList);
 
+        ListAdapter listAdapter = new ArrayAdapter<String>(this, android.R.layout.activity_list_item, friends);
+
+        friendsList.setAdapter(listAdapter);
+
+    }
+
+    // Query Example
+    public void queries(){
+        CollectionReference friendsRef = db.collection("Friends");
+        Query findAcceptedFriends = friendsRef.whereEqualTo("accepted", "true");
+    }
 
 
+    public void backButton(View view){
+        Intent backIntent = new Intent(this, FriendActivity.class);
+        startActivity(backIntent);
     }
 }
