@@ -71,5 +71,6 @@
             android:label="@string/title_activity_maps"></activity>
         <activity android:name=".activity_friends_list"></activity>
     </application>
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 </manifest>
