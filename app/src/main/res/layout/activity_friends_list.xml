@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FriendsListActivity">
+    tools:context=".FriendsListActivity"
+    android:background="@drawable/bluebackground">
 
     <ListView
         android:id="@+id/friendList"

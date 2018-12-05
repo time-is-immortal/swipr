@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.util.*;
 //import android.R;
@@ -49,6 +50,8 @@ public class HomePage extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
 
+    private String cpVal = "50";
+
     private FusedLocationProviderClient mFusedLocationClient;
     String idToken;
     int docCount = 0;
@@ -60,8 +63,10 @@ public class HomePage extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
         FloatingActionButton logOut = findViewById(R.id.logOutButton);
         int MY_PERMISSIONS_LOCATION = 99;
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, MY_PERMISSIONS_LOCATION);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_LOCATION);
+        TextView cpview = (TextView) findViewById(R.id.cp_val);
 
+        cpview.setText(cpVal);
         db = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();

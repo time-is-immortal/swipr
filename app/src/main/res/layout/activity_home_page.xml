@@ -4,7 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomePage">
+    tools:context=".HomePage"
+    android:background="@drawable/bluebackground">
+
+    <TextView
+        android:id="@+id/cp_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/dummy_val"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton4" />
 
     <ImageButton
         android:id="@+id/imageButton4"
@@ -13,6 +28,7 @@
         android:layout_marginTop="76dp"
         android:layout_marginBottom="100dp"
         android:backgroundTint="@android:color/transparent"
+        android:contentDescription="@string/don_t_worry_about_it"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,11 +43,12 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="50dp"
         android:clickable="true"
+        android:focusable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toEndOf="@+id/friendButton"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/sym_action_chat"/>
+        app:srcCompat="@android:drawable/sym_action_chat" />
 
     <Button
         android:id="@+id/button3"
@@ -39,7 +56,7 @@
         android:layout_height="wrap_content"
         android:onClick="requestButton"
         android:radius="20dp"
-        android:text="REQUEST"
+        android:text="@string/request"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageButton4"
         app:layout_constraintEnd_toEndOf="@+id/imageButton4"
@@ -57,6 +74,7 @@
         android:layout_marginEnd="14dp"
         android:layout_marginBottom="8dp"
         android:clickable="true"
+        android:focusable="true"
         app:layout_constraintBottom_toTopOf="@+id/imageButton4"
         app:layout_constraintEnd_toStartOf="@+id/messageButton"
         app:layout_constraintStart_toEndOf="@+id/logOutButton"
@@ -72,11 +90,29 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         android:clickable="true"
+        android:focusable="true"
         app:layout_constraintBottom_toTopOf="@+id/imageButton4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/medium_white_off_btn"
         app:useCompatPadding="false" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/cp"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/cp_val"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton4"
+        tools:text="CP :" />
 
 </android.support.constraint.ConstraintLayout>
