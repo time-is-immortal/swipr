@@ -1,15 +1,20 @@
 package net.swiprnoswiping.swipr;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.ActivityCompat;
 import android.os.Bundle;
 import android.view.View;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
 import android.util.*;
+//import android.R;
+import android.Manifest;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -54,6 +59,8 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         FloatingActionButton logOut = findViewById(R.id.logOutButton);
+        int MY_PERMISSIONS_LOCATION = 99;
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, MY_PERMISSIONS_LOCATION);
 
         db = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
@@ -172,6 +179,7 @@ public class HomePage extends AppCompatActivity {
         Intent requestIntent = new Intent(this, MapActivity.class);
         startActivity(requestIntent);
     }
+
 
 
 }
