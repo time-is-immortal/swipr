@@ -28,27 +28,21 @@ public class QRActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr);
-    final RelativeLayout rl = (RelativeLayout) findViewById(R.id.reLay);
-    final ImageView qrcode = (ImageView) findViewById(R.id.qrCode);
-    final String random_string = getIntent().getExtras().getString("secret_key");
-    Button btn = (Button) findViewById(R.id.genQR);
-    btn.setOnClickListener(new View.OnClickListener(){
-       @Override
-       public void onClick(View v) {
-           try {
-               Bitmap temp;
-               temp = genCode(random_string);
-               qrcode.setImageBitmap(temp);
-           }
-           catch (WriterException e) {
-               System.out.println("God is cruel");
-           }
-           catch (IOException e){
-               System.out.println("Please kill me");
-           }
-       }
-    });
-    }
+        final RelativeLayout rl = (RelativeLayout) findViewById(R.id.reLay);
+        final ImageView qrcode = (ImageView) findViewById(R.id.qrCode);
+        final String random_string = getIntent().getExtras().getString("secret_key");
+        try {
+            Bitmap temp;
+            temp = genCode(random_string);
+            qrcode.setImageBitmap(temp);
+        }
+        catch (WriterException e) {
+           System.out.println("God is cruel");
+        }
+        catch (IOException e){
+           System.out.println("Please kill me");
+        }
+}
 
     private Bitmap genCode(String text) throws WriterException, IOException {
         int width = 400;
