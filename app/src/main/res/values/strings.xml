@@ -37,5 +37,6 @@
     <string name="don_t_worry_about_it">Don\'t worry about it</string>
     <string name="dummy_val">dummy_val</string>
     <string name="cp">CP :</string>
+    <string name="press_to_accept_request">Press to Accept Request</string>
     <!--&gt;>>>>>> 5dc4580ea1a4d16cd734c6e61685d6b1bbfe159a-->
 </resources>
