@@ -31,8 +31,12 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GetTokenResult;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.firebase.firestore.GeoPoint;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.CollectionReference;
 
 public class HomePage extends AppCompatActivity {
 
@@ -42,6 +46,7 @@ public class HomePage extends AppCompatActivity {
 
     private FusedLocationProviderClient mFusedLocationClient;
     String idToken;
+    int docCount = 0;
 
     Map<String, Object> request = new HashMap<>();
     @Override
@@ -80,8 +85,7 @@ public class HomePage extends AppCompatActivity {
                 startActivity(logOutIntent);
             }
         });
-        FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
-        mUser.getIdToken(true)
+        user.getIdToken(true)
                 .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
                     public void onComplete(@NonNull Task<GetTokenResult> task) {
                         if (task.isSuccessful()) {
@@ -97,7 +101,46 @@ public class HomePage extends AppCompatActivity {
     }
 
 
-    public void addRequestToDatabase(double lng, double lat){
+    public void addRequestToDatabase(){
+        final double longitude = 0;
+        final double latitude = 0;
+        mFusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                // Got last known location. In some rare situations this can be null.
+                if (location != null) {
+                    double longitude = location.getLongitude();
+                    double latitude = location.getLatitude();
+                }
+            }
+        });
+        final CollectionReference dbRef = db.collection("Requests");
+        Query query = dbRef.whereEqualTo("Receiver",firebaseAuth.getCurrentUser().getUid());
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+
+                    for (DocumentSnapshot document : task.getResult()) {
+                        docCount += 1;
+                    }
+                    if(docCount > 0){
+                        for (DocumentSnapshot document : task.getResult()){
+                            dbRef.document(document.getId()).delete();
+                        }
+                        InputData(longitude, latitude);
+                    }
+                    else{
+                        InputData(longitude, latitude);
+                    }
+                } else {
+                    Toast.makeText(HomePage.this, "Database failed.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        docCount = 0;
+    }
+    public void InputData(double lng, double lat){
         Timestamp currentTime = Timestamp.now();
 
         GeoPoint receiverPos = new GeoPoint(lng, lat);
@@ -125,19 +168,7 @@ public class HomePage extends AppCompatActivity {
     }
 
     public void requestButton(View view){
-        double longitude = 0;
-        double latitude = 0;
-        mFusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                // Got last known location. In some rare situations this can be null.
-                if (location != null) {
-                    double longitude = location.getLongitude();
-                    double latitude = location.getLatitude();
-                }
-            }
-        });
-        addRequestToDatabase(longitude, latitude);
+        addRequestToDatabase();
         Intent requestIntent = new Intent(this, MapActivity.class);
         startActivity(requestIntent);
     }
